@@ -1,0 +1,7 @@
+﻿{
+  "SystemName": "D365",
+  "FriendlyName": "D365 base upon the Default clean",
+  "SupportRTL": true,
+  "PreviewImageUrl": "~/Themes/DefaultClean/preview.jpg",
+  "PreviewText": "The 'D365' site theme"
+}

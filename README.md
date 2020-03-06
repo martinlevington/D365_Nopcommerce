@@ -42,3 +42,22 @@ Front End | Admin area
 ## Survey for developers and product managers: ##
 
 We want to make sure our users get what they need from the platform. That is why we prepared a short survey to know you better. Your opinion really matters and we hope you can participate to give us food for thought for making nopCommerce even better! [Participate](https://www.surveymonkey.com/r/CDMQYHY)
+
+
+## Docker
+
+docker build -t nopcommerce .
+
+docker run -d -p 80:80 nopcommerce
+
+## Stop all docker containers
+
+docker stop $(docker ps -a -q)
+
+## Docker compose: ##
+
+docker-compose up -d
+
+dbadmin
+
+secret
