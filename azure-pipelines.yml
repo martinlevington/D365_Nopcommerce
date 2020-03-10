@@ -1,0 +1,39 @@
+# Docker
+# Build a Docker image 
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- aws
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+  imageName: 'nopcommerce'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:  
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        command: build
+        dockerfile: '$(Build.SourcesDirectory)/DockerfileAWS'
+        tags: |
+          $(tag)
+          nopcommerce
+    - task: ECRPushImage@1
+      inputs:
+        awsCredentials: 'aws'
+        regionName: 'eu-west-2'
+        imageSource: 'imagename'
+        sourceImageName: 'nopcommerce'
+        repositoryName: '916314771147.dkr.ecr.eu-west-2.amazonaws.com/d365_nop'
+        pushTag: $(tag)
