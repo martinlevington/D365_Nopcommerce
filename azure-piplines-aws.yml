@@ -34,6 +34,6 @@ stages:
         awsCredentials: 'aws'
         regionName: 'eu-west-2'
         imageSource: 'imagename'
-        sourceImageName: 'nopcommerce'
+        sourceImageName: $(tag)
         repositoryName: '916314771147.dkr.ecr.eu-west-2.amazonaws.com/d365_nop'
         pushTag: $(tag)
