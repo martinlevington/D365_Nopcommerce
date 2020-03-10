@@ -28,7 +28,7 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/DockerfileAWS'
         tags: |
           $(tag)
-          nopcommerce
+          
     - task: ECRPushImage@1
       inputs:
         awsCredentials: 'aws'
@@ -36,4 +36,5 @@ stages:
         imageSource: 'imagename'
         sourceImageName: $(tag)
         repositoryName: '916314771147.dkr.ecr.eu-west-2.amazonaws.com/d365_nop'
-        pushTag: $(tag)
+
+        
