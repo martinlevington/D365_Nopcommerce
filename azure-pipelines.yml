@@ -10,6 +10,7 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
+  imageName: 'nopcommerce'
 
 stages:
 - stage: Build
@@ -27,3 +28,12 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/DockerfileAWS'
         tags: |
           $(tag)
+          nopcommerce
+    - task: ECRPushImage@1
+      inputs:
+        awsCredentials: 'aws'
+        regionName: 'eu-west-2'
+        imageSource: 'imagename'
+        sourceImageName: 'nopcommerce'
+        repositoryName: '916314771147.dkr.ecr.eu-west-2.amazonaws.com/d365_nop'
+        pushTag: $(tag)
