@@ -21,20 +21,24 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - task: Docker@2
-      displayName: Build an image
+    # - task: Docker@2
+    #   displayName: Build an image
+    #   inputs:
+    #     command: build
+    #     dockerfile: '$(Build.SourcesDirectory)/DockerfileAWS'
+    #     tags: |
+    #       "$(tag):latest"
+
+    - task: CmdLine@2
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/DockerfileAWS'
-        tags: |
-          "$(tag):latest"
-          
+        script: "docker build -f $(Build.SourcesDirectory)/DockerfileAWS -t $(tag):latest ."
+
     - task: ECRPushImage@1
       inputs:
         awsCredentials: 'aws'
         regionName: 'eu-west-2'
         imageSource: 'imagename'
-        sourceImageName: $(tag)
+        sourceImageName: "$(tag)"
         repositoryName: 'd365_nop'
         outputVariable: 'pushImage'
         logRequest: true
